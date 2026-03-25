@@ -60,3 +60,7 @@ Route::group(['prefix' => 'profile', 'as' => 'profile.', 'namespace' => 'Auth', 
     }
 });
 
+
+
+Route::view('/','custom.index');
+Route::view('/category','custom.category');
