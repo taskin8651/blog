@@ -96,6 +96,85 @@
             </div>
         @endcan
 
+        {{-- CONTENT MANAGEMENT --}}
+@canany(['post_access','category_access','tag_access','comment_access','like_access','bookmark_access'])
+<div x-data="{ open:
+    {{ request()->is('admin/posts*','admin/categories*','admin/tags*','admin/comments*','admin/likes*','admin/bookmarks*')
+    ? 'true' : 'false' }}
+}">
+
+    <button @click="open = !open"
+            class="group w-full flex items-center justify-between px-3 py-2 rounded
+                   hover:bg-slate-800 transition">
+        <span class="flex items-center gap-3">
+            <i class="fas fa-newspaper text-slate-400 group-hover:text-white transition"></i>
+            Content Management
+        </span>
+
+        <i class="fas fa-chevron-down text-xs transition-transform duration-300"
+           :class="open ? 'rotate-180' : ''"></i>
+    </button>
+
+    <div x-show="open" class="ml-6 mt-1 space-y-1">
+
+        {{-- POSTS --}}
+        @can('post_access')
+        <a href="{{ route('admin.posts.index') }}"
+           class="block px-3 py-2 rounded transition
+           {{ request()->is('admin/posts*') ? 'bg-slate-800 text-white' : 'hover:bg-slate-800 hover:pl-4' }}">
+            <i class="fas fa-file-alt mr-2"></i> Posts
+        </a>
+        @endcan
+
+        {{-- CATEGORIES --}}
+        @can('category_access')
+        <a href="{{ route('admin.categories.index') }}"
+           class="block px-3 py-2 rounded transition
+           {{ request()->is('admin/categories*') ? 'bg-slate-800 text-white' : 'hover:bg-slate-800 hover:pl-4' }}">
+            <i class="fas fa-list mr-2"></i> Categories
+        </a>
+        @endcan
+
+        {{-- TAGS --}}
+        @can('tag_access')
+        <a href="{{ route('admin.tags.index') }}"
+           class="block px-3 py-2 rounded transition
+           {{ request()->is('admin/tags*') ? 'bg-slate-800 text-white' : 'hover:bg-slate-800 hover:pl-4' }}">
+            <i class="fas fa-tags mr-2"></i> Tags
+        </a>
+        @endcan
+
+        {{-- COMMENTS --}}
+        @can('comment_access')
+        <a href="{{ route('admin.comments.index') }}"
+           class="block px-3 py-2 rounded transition
+           {{ request()->is('admin/comments*') ? 'bg-slate-800 text-white' : 'hover:bg-slate-800 hover:pl-4' }}">
+            <i class="fas fa-comments mr-2"></i> Comments
+        </a>
+        @endcan
+
+        {{-- LIKES --}}
+        @can('like_access')
+        <a href="{{ route('admin.likes.index') }}"
+           class="block px-3 py-2 rounded transition
+           {{ request()->is('admin/likes*') ? 'bg-slate-800 text-white' : 'hover:bg-slate-800 hover:pl-4' }}">
+            <i class="fas fa-heart mr-2"></i> Likes
+        </a>
+        @endcan
+
+        {{-- BOOKMARKS 🔥 --}}
+        @can('bookmark_access')
+        <a href="{{ route('admin.bookmarks.index') }}"
+           class="block px-3 py-2 rounded transition
+           {{ request()->is('admin/bookmarks*') ? 'bg-slate-800 text-white' : 'hover:bg-slate-800 hover:pl-4' }}">
+            <i class="fas fa-bookmark mr-2"></i> Bookmarks
+        </a>
+        @endcan
+
+    </div>
+</div>
+@endcanany
+
         {{-- CHANGE PASSWORD --}}
         @if(file_exists(app_path('Http/Controllers/Auth/ChangePasswordController.php')))
             @can('profile_password_edit')

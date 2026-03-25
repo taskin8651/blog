@@ -30,6 +30,24 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.', 'namespace' => 'Admin', 'mi
     //
     Route::resource('categories', 'CategoryController');
 
+    // 
+    Route::resource('posts', 'PostController');
+
+    Route::resource('tags', 'TagController');
+
+    Route::get('comments', 'CommentController@index')->name('comments.index');
+
+Route::get('comments/{comment}/approve', 'CommentController@approve')->name('comments.approve');
+
+Route::get('comments/{comment}/reject', 'CommentController@reject')->name('comments.reject');
+
+Route::delete('comments/{comment}', 'CommentController@destroy')->name('comments.destroy');
+
+Route::resource('likes', 'LikeController')->only(['index','destroy']);
+Route::resource('bookmarks', 'BookmarkController')->only(['index','destroy']);
+Route::delete('bookmarks/destroy', 'BookmarkController@massDestroy')->name('bookmarks.massDestroy');
+Route::resource('ads', 'AdController');
+
    
 });
 Route::group(['prefix' => 'profile', 'as' => 'profile.', 'namespace' => 'Auth', 'middleware' => ['auth']], function () {

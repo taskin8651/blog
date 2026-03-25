@@ -1,0 +1,58 @@
+<?php
+
+namespace App\Http\Controllers\Admin;
+
+use App\Http\Controllers\Controller;
+use App\Models\Tag;
+use Illuminate\Http\Request;
+
+class TagController extends Controller
+{
+    public function index()
+    {
+        $tags = Tag::latest()->get();
+        return view('admin.tags.index', compact('tags'));
+    }
+
+    public function create()
+    {
+        return view('admin.tags.create');
+    }
+
+    public function store(Request $request)
+    {
+        $request->validate([
+            'name' => 'required'
+        ]);
+
+        Tag::create([
+            'name' => $request->name
+        ]);
+
+        return redirect()->route('admin.tags.index')->with('message','Tag Created');
+    }
+
+    public function edit(Tag $tag)
+    {
+        return view('admin.tags.edit', compact('tag'));
+    }
+
+    public function update(Request $request, Tag $tag)
+    {
+        $request->validate([
+            'name' => 'required'
+        ]);
+
+        $tag->update([
+            'name' => $request->name
+        ]);
+
+        return redirect()->route('admin.tags.index')->with('message','Updated');
+    }
+
+    public function destroy(Tag $tag)
+    {
+        $tag->delete();
+        return back()->with('message','Deleted');
+    }
+}
