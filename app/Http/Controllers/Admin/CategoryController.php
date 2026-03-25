@@ -23,15 +23,23 @@ class CategoryController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'name' => 'required'
+            'name' => 'required',
+            'image' => 'nullable|image|mimes:jpg,jpeg,png,webp|max:2048'
         ]);
 
-        Category::create([
+        $category = Category::create([
             'name' => $request->name,
             'slug' => Str::slug($request->name),
         ]);
 
-        return redirect()->route('admin.categories.index')->with('message', 'Category Created');
+        // 🔥 Image Upload (Spatie)
+        if ($request->hasFile('image')) {
+            $category->addMediaFromRequest('image')
+                     ->toMediaCollection('category_image');
+        }
+
+        return redirect()->route('admin.categories.index')
+            ->with('message', 'Category Created');
     }
 
     public function edit(Category $category)
@@ -42,7 +50,8 @@ class CategoryController extends Controller
     public function update(Request $request, Category $category)
     {
         $request->validate([
-            'name' => 'required'
+            'name' => 'required',
+            'image' => 'nullable|image|mimes:jpg,jpeg,png,webp|max:2048'
         ]);
 
         $category->update([
@@ -50,7 +59,16 @@ class CategoryController extends Controller
             'slug' => Str::slug($request->name),
         ]);
 
-        return redirect()->route('admin.categories.index')->with('message', 'Category Updated');
+        // 🔥 Image Update
+        if ($request->hasFile('image')) {
+            $category->clearMediaCollection('category_image');
+
+            $category->addMediaFromRequest('image')
+                     ->toMediaCollection('category_image');
+        }
+
+        return redirect()->route('admin.categories.index')
+            ->with('message', 'Category Updated');
     }
 
     public function show(Category $category)
@@ -60,7 +78,11 @@ class CategoryController extends Controller
 
     public function destroy(Category $category)
     {
+        // 🔥 Delete image also
+        $category->clearMediaCollection('category_image');
+
         $category->delete();
+
         return back()->with('message', 'Category Deleted');
     }
 }
