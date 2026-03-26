@@ -1,4 +1,13 @@
 <?php
+use App\Http\Controllers\Custom\CategoryController;
+
+use App\Http\Controllers\Custom\PostController;
+use App\Http\Controllers\Custom\IndexController;
+use App\Http\Controllers\Custom\TagController;
+use App\Http\Controllers\Custom\TrendingController;
+use App\Http\Controllers\Custom\BookmarkController;
+use App\Http\Controllers\Custom\LikeController;
+use App\Http\Controllers\Custom\CommentController;
 
 Route::redirect('/', '/login');
 Route::get('/home', function () {
@@ -62,5 +71,36 @@ Route::group(['prefix' => 'profile', 'as' => 'profile.', 'namespace' => 'Auth', 
 
 
 
-Route::view('/','custom.index');
-Route::view('/category','custom.category');
+Route::get('/', [IndexController::class, 'index'])->name('custom.home');
+
+Route::get('/categories', [CategoryController::class, 'index'])->name('categories');
+
+Route::get('/category/{slug}', [CategoryController::class, 'show'])->name('category.show');
+
+Route::get('/post/{slug}', [PostController::class, 'show'])->name('post.show');
+
+Route::get('/tag/{id}', [TagController::class, 'show'])->name('tag.show');
+
+Route::get('/trending', [TrendingController::class, 'index'])->name('trending');
+
+
+Route::middleware('auth')->group(function () {
+
+    // 🔥 Bookmark list page
+    Route::get('/bookmarks', [BookmarkController::class, 'index'])
+        ->name('bookmarks');
+
+        Route::post('/bookmark/{post}', [BookmarkController::class, 'store'])
+            ->name('bookmark.store');
+
+    // 🔥 Remove bookmark
+    Route::delete('/bookmarks/{bookmark}', [BookmarkController::class, 'destroy'])
+        ->name('bookmarks.destroy');
+
+        Route::post('/like/{post}', [LikeController::class, 'toggle'])
+    ->name('like.toggle');
+
+    Route::post('/comments/{post}', [CommentController::class, 'store'])
+    ->name('comments.store');
+
+});

@@ -49,17 +49,17 @@
     <div class="newsten-footer-nav h-100">
       <ul class="h-100 d-flex align-items-center justify-content-between">
         <li class="active">
-          <a href="home.html">
+          <a href="{{ route('custom.home') }}">
             <i class="ti ti-home-2"></i>
           </a>
         </li>
         <li>
-          <a href="catagory.html">
+          <a href="{{ route('categories') }}">
             <i class="ti ti-layout"></i>
           </a>
         </li>
         <li>
-          <a href="trending.html">
+          <a href="{{ route('trending') }}">
             <i class="ti ti-bolt"></i>
           </a>
         </li>
@@ -69,7 +69,7 @@
           </a>
         </li>
         <li>
-          <a href="bookmark.html">
+          <a href="{{ route('bookmarks') }}">
             <i class="ti ti-bookmark"></i>
           </a>
         </li>

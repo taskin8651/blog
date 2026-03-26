@@ -33,7 +33,7 @@
       <div class="weather-update mb-4">
         <l class="icon ti ti-temperature-sun"></l>
         <h4 class="mb-1">92°F</h4>
-        <h6 class="mb-0">Dhaka</h6>
+        <h6 class="mb-0">India</h6>
         <p class="mb-0">Mostly sunny</p>
       </div>
       <div class="time-date">
@@ -101,76 +101,81 @@
         </div>
 
         <!-- Hero Slides-->
-        <div class="hero-slides owl-carousel">
+       <div class="hero-slides owl-carousel">
 
-          <!-- Single Hero Slide-->
-          <div class="single-hero-slide" style="background-image: url('img/bg-img/4.jpg')">
-            <!-- Background Shape-->
-            <div class="background-shape">
-              <div class="circle2"></div>
-              <div class="circle3"></div>
-            </div>
-            <div class="slide-content h-100 d-flex align-items-end">
-              <div class="container-fluid mb-3">
-                <div class="video-icon">
-                  <i class="ti ti-player-play"></i>
-                </div>
-                <a class="bookmark-post" href="#"><i class="ti ti-bookmark"></i></a>
-                <a class="post-catagory" href="catagory.html">Politics</a>
-                <a class="post-title d-block" href="single.html">Massive riots in the city to establish rule of law</a>
-                <div class="post-meta d-flex align-items-center">
-                  <a href="#"><i class="me-1 ti ti-user-circle"></i> Mayaj</a>
-                  <a href="#"><i class="me-1 ti ti-calendar-month"></i> March 26</a>
-                  <span><i class="me-1 ti ti-chart-bar"></i> 4 min read</span>
-                </div>
-              </div>
-            </div>
-          </div>
+    @foreach($categories as $category)
 
-          <!-- Single Hero Slide-->
-          <div class="single-hero-slide" style="background-image: url('img/bg-img/2.jpg')">
-            <!-- Background Shape-->
-            <div class="background-shape">
-              <div class="circle2"></div>
-              <div class="circle3"></div>
-            </div>
-            <div class="slide-content h-100 d-flex align-items-end">
-              <div class="container-fluid mb-3">
-                <a class="bookmark-post" href="#"><i class="ti ti-bookmark"></i></a>
-                <a class="post-catagory" href="catagory.html">Fashion</a>
-                <a class="post-title d-block" href="single.html">Fashion 2020: How to get the golden skin on the
-                  outside</a>
-                <div class="post-meta d-flex align-items-center">
-                  <a href="#"><i class="me-1 ti ti-user-circle"></i>Lim</a>
-                  <a href="#"><i class="me-1 ti ti-calendar-month"></i>March 23</a>
-                  <span><i class="me-1 ti ti-chart-bar"></i>9 min read</span>
-                </div>
-              </div>
-            </div>
-          </div>
+        @if($category->posts->count())
+        @php $post = $category->posts->first(); @endphp
 
-          <!-- Single Hero Slide-->
-          <div class="single-hero-slide" style="background-image: url('img/bg-img/5.jpg')">
-            <!-- Background Shape-->
+        <div class="single-hero-slide"
+             style="background-image: url('{{ $post->image_url }}')">
+
+            {{-- Background Shape --}}
             <div class="background-shape">
-              <div class="circle2"></div>
-              <div class="circle3"></div>
+                <div class="circle2"></div>
+                <div class="circle3"></div>
             </div>
+
             <div class="slide-content h-100 d-flex align-items-end">
-              <div class="container-fluid mb-3">
-                <a class="bookmark-post" href="#"><i class="ti ti-bookmark"></i></a>
-                <a class="post-catagory" href="catagory.html">Health</a>
-                <a class="post-title d-block" href="single.html">Loses over 30kg on keto diet and one meal a day</a>
-                <div class="post-meta d-flex align-items-center">
-                  <a href="#"><i class="me-1 ti ti-user-circle"></i>Nazrul</a>
-                  <a href="#"><i class="me-1 ti ti-calendar-month"></i>March 21</a>
-                  <span><i class="me-1 ti ti-chart-bar"></i>3 min read</span>
+                <div class="container-fluid mb-3">
+
+                    {{-- Video Icon --}}
+                    <div class="video-icon">
+                        <i class="ti ti-player-play"></i>
+                    </div>
+
+                    {{-- Bookmark --}}
+                    <form action="{{ route('bookmark.store', $post->id) }}" method="POST">
+    @csrf
+
+    <button type="submit" class="bookmark-post border-0 bg-transparent">
+        <i class="ti ti-bookmark"></i>
+    </button>
+</form>
+
+                    {{-- Category --}}
+                    <a class="post-catagory"
+                       href="{{ route('category.show', $category->slug) }}">
+                        {{ $category->name }}
+                    </a>
+
+                    {{-- Title --}}
+                    <a class="post-title d-block"
+                       href="{{ route('post.show', $post->slug) }}">
+                        {{ $post->title }}
+                    </a>
+
+                    {{-- Meta --}}
+                    <div class="post-meta d-flex align-items-center">
+
+                        <a href="#">
+                            <i class="me-1 ti ti-user-circle"></i>
+                            Admin
+                        </a>
+
+                        <a href="#">
+                            <i class="me-1 ti ti-calendar-month"></i>
+                            {{ $post->created_at->format('d M') }}
+                        </a>
+
+                        <span>
+                            <i class="me-1 ti ti-chart-bar"></i>
+                            {{ rand(3,10) }} min read
+                        </span>
+
+                    </div>
+
                 </div>
-              </div>
             </div>
-          </div>
 
         </div>
+
+        @endif
+
+    @endforeach
+
+</div>
       </div>
     </div>
 
@@ -189,149 +194,82 @@
         <!-- Catagory Slides-->
         <div class="catagory-slides owl-carousel">
           <!-- Catagory Card-->
-          <div class="card catagory-card">
-            <a href="catagory.html">
-              <img src="img/bg-img/8.jpg" alt="">
-              <h6>Politics</h6>
-            </a>
-          </div>
+         @foreach($topCategories as $category)
+            <div class="card catagory-card">
 
-          <!-- Catagory Card-->
-          <div class="card catagory-card">
-            <a href="catagory.html">
-              <img src="img/bg-img/3.jpg" alt="">
-              <h6>Fashion</h6>
-            </a>
-          </div>
+                <a href="{{ route('category.show', $category->slug) }}">
 
-          <!-- Catagory Card-->
-          <div class="card catagory-card">
-            <a href="catagory.html">
-              <img src="img/bg-img/6.jpg" alt="">
-              <h6>Tech</h6>
-            </a>
-          </div>
+                    {{-- Image --}}
+                    <img src="{{ $category->image_url }}" alt="">
 
-          <!-- Catagory Card-->
-          <div class="card catagory-card">
-            <a href="catagory.html">
-              <img src="img/bg-img/15.jpg" alt="">
-              <h6>Lifestyle</h6>
-            </a>
-          </div>
+                    {{-- Name --}}
+                    <h6>{{ $category->name }}</h6>
 
-          <!-- Catagory Card-->
-          <div class="card catagory-card">
-            <a href="catagory.html">
-              <img src="img/bg-img/9.jpg" alt="">
-              <h6>Sports</h6>
-            </a>
-          </div>
+                </a>
 
-          <!-- Catagory Card-->
-          <div class="card catagory-card">
-            <a href="catagory.html">
-              <img src="img/bg-img/10.jpg" alt="">
-              <h6>World</h6>
-            </a>
-          </div>
+            </div>
+            @endforeach
 
-          <!-- Catagory Card-->
-          <div class="card catagory-card">
-            <a href="catagory.html">
-              <img src="img/bg-img/14.jpg" alt="">
-              <h6>Environment</h6>
-            </a>
-          </div>
-
-          <!-- Catagory Card-->
-          <div class="card catagory-card">
-            <a href="catagory.html">
-              <img src="img/bg-img/13.jpg" alt="">
-              <h6>People</h6>
-            </a>
-          </div>
-
-          <!-- Catagory Card-->
-          <div class="card catagory-card">
-            <a href="catagory.html">
-              <img src="img/bg-img/12.jpg" alt="">
-              <h6>Gadgets</h6>
-            </a>
-          </div>
-
-          <!-- Catagory Card-->
-          <div class="card catagory-card">
-            <a href="catagory.html">
-              <img src="img/bg-img/7.jpg" alt="">
-              <h6>Health</h6>
-            </a>
-          </div>
+       
         </div>
       </div>
     </div>
 
     <!-- Trending News Wrapper-->
     <div class="trending-news-wrapper">
-      <div class="container">
+    <div class="container">
         <div class="d-flex align-items-center justify-content-between mb-3">
-          <h5 class="mb-0 ps-1 newsten-title">Trending</h5>
-          <a class="btn btn-primary btn-sm" href="trending.html">View
-            All</a>
-        </div>
-      </div>
+            <h5 class="mb-0 ps-1 newsten-title">Trending</h5>
 
-      <div class="container">
-        <!-- Single Trending Post-->
-        <div class="single-trending-post d-flex">
-          <div class="post-thumbnail">
-            <img src="img/bg-img/11.jpg" alt="">
-          </div>
-          <div class="post-content">
-            <a class="post-title" href="single.html">Swimming is a good exercise for the
-              body</a>
-            <div class="post-meta d-flex align-items-center">
-              <a href="catagory.html">Sports</a>
-              <a href="#">02 Jun 24</a>
-            </div>
-          </div>
+            <a class="btn btn-primary btn-sm" href="#">
+                View All
+            </a>
         </div>
-
-        <!-- Single Trending Post-->
-        <div class="single-trending-post d-flex">
-          <div class="post-thumbnail">
-            <div class="video-icon">
-              <i class="ti ti-player-play"></i>
-            </div>
-            <img src="img/bg-img/16.jpg" alt="">
-          </div>
-          <div class="post-content">
-            <a class="post-title" href="single.html">The drone is banned in BD without
-              permission</a>
-            <div class="post-meta d-flex align-items-center">
-              <a href="catagory.html">Tech</a>
-              <a href="#">03 Jun 24</a>
-            </div>
-          </div>
-        </div>
-
-        <!-- Single Trending Post-->
-        <div class="single-trending-post d-flex">
-          <div class="post-thumbnail">
-            <img src="img/bg-img/17.jpg" alt="">
-          </div>
-          <div class="post-content">
-            <a class="post-title" href="single.html">Some tips for taking care of the body this
-              summer</a>
-            <div class="post-meta d-flex align-items-center">
-              <a href="catagory.html">Fashion</a>
-              <a href="#">04 Jun
-                24</a>
-            </div>
-          </div>
-        </div>
-      </div>
     </div>
+
+    <div class="container">
+
+        @foreach($trendingPosts as $post)
+        <div class="single-trending-post d-flex mb-3">
+
+            <div class="post-thumbnail">
+
+                {{-- Image --}}
+                <img src="{{ $post->image_url }}" alt="">
+
+            </div>
+
+            <div class="post-content">
+
+                {{-- Title --}}
+                <a class="post-title"
+                   href="{{ route('post.show', $post->slug) }}">
+                    {{ $post->title }}
+                </a>
+
+                {{-- Meta --}}
+                <div class="post-meta d-flex align-items-center">
+
+                    {{-- Category --}}
+                    <a href="{{ route('category.show', $post->category->slug) }}">
+                        {{ $post->category->name }}
+                    </a>
+
+                    {{-- Date --}}
+                    <a href="#">
+                        {{ $post->created_at->format('d M y') }}
+                    </a>
+
+                </div>
+
+            </div>
+
+        </div>
+        @endforeach
+
+    </div>
+</div>
+
 
     <!-- Editorial Choice News Wrapper-->
     <div class="editorial-choice-news-wrapper">
@@ -348,423 +286,254 @@
       <div class="container">
         <!-- Editorial Choice News Slide-->
         <div class="editorial-choice-news-slide owl-carousel">
-          <!-- Single Slide-->
-          <div class="single-editorial-slide d-flex">
-            <a class="bookmark-post" href="#">
-              <i class="ti ti-bookmark"></i>
-            </a>
-            <div class="post-thumbnail">
-              <div class="video-icon">
-                <i class="ti ti-player-play"></i>
-              </div>
-              <img src="img/bg-img/9.jpg" alt="">
-            </div>
-            <div class="post-content">
-              <a class="post-catagory" href="catagory.html">Sports</a>
-              <a class="post-title d-block" href="single.html">Basketball is becoming popular young people</a>
-              <div class="post-meta d-flex align-items-center">
-                <a href="#"><i class="me-1 ti ti-user-circle"></i>Nazrul</a>
-                <a href="#"><i class="me-1 ti ti-clock"></i>30 March</a>
-              </div>
-            </div>
-          </div>
+          @foreach($editorialPosts as $post)
+<div class="single-editorial-slide d-flex">
 
-          <!-- Single Slide-->
-          <div class="single-editorial-slide d-flex">
-            <a class="bookmark-post" href="#">
-              <i class="ti ti-bookmark"></i>
-            </a>
-            <div class="post-thumbnail">
-              <img src="img/bg-img/14.jpg" alt="">
-            </div>
-            <div class="post-content">
-              <a class="post-catagory" href="catagory.html">Environment</a>
-              <a class="post-title d-block" href="single.html">We are responsible for environment pollution</a>
-              <div class="post-meta d-flex align-items-center">
-                <a href="#"><i class="me-1 ti ti-user-circle"></i>Nazrul</a>
-                <a href="#"><i class="me-1 ti ti-clock"></i>16 March</a>
-              </div>
-            </div>
-          </div>
+    <form action="{{ route('bookmark.store', $post->id) }}" method="POST">
+    @csrf
 
-          <!-- Single Slide-->
-          <div class="single-editorial-slide d-flex">
-            <a class="bookmark-post" href="#">
-              <i class="ti ti-bookmark"></i>
-            </a>
-            <div class="post-thumbnail">
-              <div class="video-icon">
-                <i class="ti ti-player-play"></i>
-              </div>
-              <img src="img/bg-img/15.jpg" alt="">
-            </div>
-            <div class="post-content">
-              <a class="post-catagory" href="catagory.html">Cooking</a>
-              <a class="post-title d-block" href="single.html">How to make a crunchy toast biscuit in home</a>
-              <div class="post-meta d-flex align-items-center">
-                <a href="#"><i class="me-1 ti ti-user-circle"></i>Nazrul</a>
-                <a href="#"><i class="me-1 ti ti-clock"></i>24 March</a>
-              </div>
-            </div>
-          </div>
+    <button type="submit" class="bookmark-post border-0 bg-transparent">
+        <i class="ti ti-bookmark"></i>
+    </button>
+</form>
 
-          <!-- Single Slide-->
-          <div class="single-editorial-slide d-flex">
-            <a class="bookmark-post" href="#">
-              <i class="ti ti-bookmark"></i>
-            </a>
-            <div class="post-thumbnail">
-              <img src="img/bg-img/10.jpg" alt="">
-            </div>
-            <div class="post-content">
-              <a class="post-catagory" href="catagory.html">World</a>
-              <a class="post-title d-block" href="single.html">World most top building is situated in New York city</a>
-              <div class="post-meta d-flex align-items-center">
-                <a href="#"><i class="me-1 ti ti-user-circle"></i>Nazrul</a>
-                <a href="#"><i class="me-1 ti ti-clock"></i>22 March</a>
-              </div>
-            </div>
-          </div>
+    <div class="post-thumbnail">
+        <img src="{{ $post->image_url }}" alt="">
+    </div>
 
-          <!-- Single Slide-->
-          <div class="single-editorial-slide d-flex">
-            <a class="bookmark-post" href="#">
-              <i class="ti ti-bookmark"></i>
-            </a>
-            <div class="post-thumbnail">
-              <div class="video-icon">
-                <i class="ti ti-player-play"></i>
-              </div>
-              <img src="img/bg-img/13.jpg" alt="">
-            </div>
-            <div class="post-content">
-              <a class="post-catagory" href="catagory.html">People</a>
-              <a class="post-title d-block" href="single.html">Massive riots in the city to establish rule of law</a>
-              <div class="post-meta d-flex align-items-center">
-                <a href="#"><i class="me-1 ti ti-user-circle"></i>Nazrul</a>
-                <a href="#"><i class="me-1 ti ti-clock"></i>17 March</a>
-              </div>
-            </div>
-          </div>
+    <div class="post-content">
 
-          <!-- Single Slide-->
-          <div class="single-editorial-slide d-flex">
-            <a class="bookmark-post" href="#">
-              <i class="ti ti-bookmark"></i>
-            </a>
-            <div class="post-thumbnail">
-              <img src="img/bg-img/6.jpg" alt="">
-            </div>
-            <div class="post-content">
-              <a class="post-catagory" href="catagory.html">Gadgets</a>
-              <a class="post-title d-block" href="single.html">International Robot Olympiad was held in March 2020</a>
-              <div class="post-meta d-flex align-items-center">
-                <a href="#"><i class="me-1 ti ti-user-circle"></i>Nazrul</a>
-                <a href="#"><i class="me-1 ti ti-clock"></i>15 March</a>
-              </div>
-            </div>
-          </div>
+        {{-- Category --}}
+        <a class="post-catagory"
+           href="{{ route('category.show', $post->category->slug) }}">
+            {{ $post->category->name }}
+        </a>
 
-          <!-- Single Slide-->
-          <div class="single-editorial-slide d-flex">
-            <a class="bookmark-post" href="#">
-              <i class="ti ti-bookmark"></i>
+        {{-- Title --}}
+        <a class="post-title d-block"
+           href="{{ route('post.show', $post->slug) }}">
+            {{ $post->title }}
+        </a>
+
+        {{-- Meta --}}
+        <div class="post-meta d-flex align-items-center">
+            <a href="#">
+                <i class="me-1 ti ti-user-circle"></i> Admin
             </a>
-            <div class="post-thumbnail">
-              <img src="img/bg-img/7.jpg" alt="">
-            </div>
-            <div class="post-content">
-              <a class="post-catagory" href="catagory.html">Health</a>
-              <a class="post-title d-block" href="single.html">Loses over 30kg on keto diet and one meal a day</a>
-              <div class="post-meta d-flex align-items-center">
-                <a href="#"><i class="me-1 ti ti-user-circle"></i>Nazrul</a>
-                <a href="#"><i class="me-1 ti ti-clock"></i>19 March</a>
-              </div>
-            </div>
-          </div>
+            <a href="#">
+                <i class="me-1 ti ti-clock"></i>
+                {{ $post->created_at->format('d M') }}
+            </a>
+        </div>
+
+    </div>
+
+</div>
+@endforeach
         </div>
       </div>
     </div>
 
     <!-- For You News Wrapper-->
-    <div class="for-you-news-wrapper">
-      <div class="container">
+  <div class="for-you-news-wrapper">
+    <div class="container">
         <div class="d-flex align-items-center justify-content-between">
-          <h5 class="mb-0 ps-1 newsten-title">For You</h5>
-          <a class="btn btn-primary btn-sm" href="#">View All</a>
+            <h5 class="mb-0 ps-1 newsten-title">For You</h5>
+            <a class="btn btn-primary btn-sm" href="#">View All</a>
         </div>
-      </div>
-
-      <div class="container">
-        <div class="row">
-          <!-- Single Recommended Post-->
-          <div class="col-6 col-md-4">
-            <div class="single-recommended-post mt-3">
-              <a class="bookmark-post" href="#">
-                <i class="ti ti-bookmark"></i>
-              </a>
-              <div class="post-thumbnail">
-                <img src="img/bg-img/18.jpg" alt="">
-              </div>
-              <div class="post-content">
-                <a class="post-catagory" href="catagory.html">Health</a>
-                <a class="post-title" href="single.html">Lemon is useful to lose weight</a>
-              </div>
-            </div>
-          </div>
-
-          <!-- Single Recommended Post-->
-          <div class="col-6 col-md-4">
-            <div class="single-recommended-post mt-3">
-              <a class="bookmark-post" href="#">
-                <i class="ti ti-bookmark"></i>
-              </a>
-              <div class="post-thumbnail">
-                <img src="img/bg-img/19.jpg" alt="">
-              </div>
-              <div class="post-content">
-                <a class="post-catagory" href="catagory.html">World</a>
-                <a class="post-title" href="single.html">World is getting warm rapidly</a>
-              </div>
-            </div>
-          </div>
-
-          <!-- Single Recommended Post-->
-          <div class="col-6 col-md-4">
-            <div class="single-recommended-post mt-3">
-              <a class="bookmark-post" href="#">
-                <i class="ti ti-bookmark"></i>
-              </a>
-              <div class="post-thumbnail">
-                <img src="img/bg-img/9.jpg" alt="">
-              </div>
-              <div class="post-content">
-                <a class="post-catagory" href="catagory.html">Sports</a>
-                <a class="post-title" href="single.html">WBL was held in June 2020</a>
-              </div>
-            </div>
-          </div>
-
-          <!-- Single Recommended Post-->
-          <div class="col-6 col-md-4">
-            <div class="single-recommended-post mt-3">
-              <div class="video-icon">
-                <i class="ti ti-player-play"></i>
-              </div>
-              <a class="bookmark-post" href="#">
-                <i class="ti ti-bookmark"></i>
-              </a>
-              <div class="post-thumbnail">
-                <img src="img/bg-img/15.jpg" alt="">
-              </div>
-              <div class="post-content">
-                <a class="post-catagory" href="catagory.html">Lifestyle</a>
-                <a class="post-title" href="single.html">Make yummy toast in home</a>
-              </div>
-            </div>
-          </div>
-
-        </div>
-      </div>
     </div>
 
+    <div class="container">
+        <div class="row">
+
+            @foreach($forYouPosts as $post)
+            <div class="col-6 col-md-4">
+
+                <div class="single-recommended-post mt-3">
+
+                    {{-- Bookmark --}}
+                     <form action="{{ route('bookmark.store', $post->id) }}" method="POST">
+    @csrf
+
+    <button type="submit" class="bookmark-post border-0 bg-transparent">
+        <i class="ti ti-bookmark"></i>
+    </button>
+</form>
+
+                    {{-- Image --}}
+                    <div class="post-thumbnail">
+                        <img src="{{ $post->image_url }}" alt="">
+                    </div>
+
+                    <div class="post-content">
+
+                        {{-- Category --}}
+                        <a class="post-catagory"
+                           href="{{ route('category.show', $post->category->slug) }}">
+                            {{ $post->category->name }}
+                        </a>
+
+                        {{-- Title --}}
+                        <a class="post-title"
+                           href="{{ route('post.show', $post->slug) }}">
+                            {{ $post->title }}
+                        </a>
+
+                    </div>
+
+                </div>
+
+            </div>
+            @endforeach
+
+        </div>
+    </div>
+</div>
     <!-- Tabs News Wrapper-->
-    <div class="tabs-news-wrapper bg-gray">
-      <div class="container">
-        <!-- Nav Tabs-->
+  <div class="tabs-news-wrapper bg-gray">
+    <div class="container">
+
+        {{-- NAV TABS --}}
         <nav>
-          <div class="nav nav-tabs" id="nav-tab" role="tablist">
-            <button class="nav-link" id="nav-newest-tab" data-bs-target="#nav-newest" data-bs-toggle="tab" role="tab"
-              aria-controls="nav-newest" aria-selected="false">Newest</button>
+            <div class="nav nav-tabs" role="tablist">
 
-            <button class="nav-link active" id="nav-popular-tab" data-bs-target="#nav-popular" data-bs-toggle="tab"
-              role="tab" aria-controls="nav-popular" aria-selected="true">Popular</button>
+                <button class="nav-link"
+                        data-bs-toggle="tab"
+                        data-bs-target="#nav-newest">
+                    Newest
+                </button>
 
-            <button class="nav-link" id="nav-featured-tab" data-bs-target="#nav-featured" data-bs-toggle="tab"
-              role="tab" aria-controls="nav-featured" aria-selected="false">Featured</button>
-          </div>
+                <button class="nav-link active"
+                        data-bs-toggle="tab"
+                        data-bs-target="#nav-popular">
+                    Popular
+                </button>
+
+                <button class="nav-link"
+                        data-bs-toggle="tab"
+                        data-bs-target="#nav-featured">
+                    Featured
+                </button>
+
+            </div>
         </nav>
 
-        <!-- Tabs Content-->
-        <div class="tab-content" id="nav-tabContent">
-          <!-- Single Tab Pane-->
-          <div class="tab-pane fade" id="nav-newest" role="tabpanel" aria-labelledby="nav-newest-tab" tabindex="0">
-            <!-- Single News Post-->
-            <div class="single-news-post d-flex align-items-center">
-              <div class="post-thumbnail">
-                <div class="video-icon">
-                  <i class="ti ti-player-play"></i>
+        {{-- TAB CONTENT --}}
+        <div class="tab-content">
+
+            {{-- 🔥 NEWEST --}}
+            <div class="tab-pane fade" id="nav-newest">
+                @foreach($newestPosts as $post)
+                <div class="single-news-post d-flex align-items-center">
+
+                    <div class="post-thumbnail">
+                        <img src="{{ $post->image_url }}" alt="">
+                    </div>
+
+                    <div class="post-content">
+                        <a class="post-title"
+                           href="{{ route('post.show', $post->slug) }}">
+                            {{ $post->title }}
+                        </a>
+
+                        <div class="post-meta">
+                            <a href="#">
+                                {{ $post->created_at->diffForHumans() }}
+                            </a>
+                        </div>
+                    </div>
+
                 </div>
-                <img src="img/bg-img/20.jpg" alt="">
-              </div>
-              <div class="post-content">
-                <a class="post-title" href="single.html">Morning walking &amp; running is good
-                  for health</a>
-                <div class="post-meta d-flex align-items-center">
-                  <a href="#">9 min ago</a>
-                </div>
-              </div>
+                @endforeach
             </div>
 
-            <!-- Single News Post-->
-            <div class="single-news-post d-flex align-items-center">
-              <div class="post-thumbnail">
-                <img src="img/bg-img/21.jpg" alt="">
-              </div>
-              <div class="post-content">
-                <a class="post-title" href="single.html">BD celebrate independence day in 26
-                  march</a>
-                <div class="post-meta d-flex align-items-center">
-                  <a href="#">33 min ago</a>
+            {{-- 🔥 POPULAR --}}
+            <div class="tab-pane fade show active" id="nav-popular">
+                @foreach($popularPosts as $post)
+                <div class="single-news-post d-flex align-items-center">
+
+                    <div class="post-thumbnail">
+                        <img src="{{ $post->image_url }}" alt="">
+                    </div>
+
+                    <div class="post-content">
+                        <a class="post-title"
+                           href="{{ route('post.show', $post->slug) }}">
+                            {{ $post->title }}
+                        </a>
+
+                        <div class="post-meta">
+                            <a href="{{ route('category.show', $post->category->slug) }}">
+                                {{ $post->category->name }}
+                            </a>
+
+                            <a href="#">
+                                {{ $post->views_count }} Views
+                            </a>
+                        </div>
+                    </div>
+
                 </div>
-              </div>
+                @endforeach
             </div>
 
-            <!-- Single News Post-->
-            <div class="single-news-post d-flex align-items-center">
-              <div class="post-thumbnail">
-                <img src="img/bg-img/22.jpg" alt="">
-              </div>
-              <div class="post-content">
-                <a class="post-title" href="single.html">Skating nowadays very popular sports in
-                  sea area</a>
-                <div class="post-meta d-flex align-items-center">
-                  <a href="#">57 min ago</a>
-                </div>
-              </div>
-            </div>
-          </div>
+            {{-- 🔥 FEATURED --}}
+            <div class="tab-pane fade" id="nav-featured">
+                @foreach($featuredPosts as $post)
+                <div class="single-news-post d-flex align-items-center">
 
-          <!-- Single Tab Pane-->
-          <div class="tab-pane fade show active" id="nav-popular" role="tabpanel" aria-labelledby="nav-popular-tab"
-            tabindex="0">
-            <!-- Single News Post-->
-            <div class="single-news-post d-flex align-items-center">
-              <div class="post-thumbnail">
-                <img src="img/bg-img/23.jpg" alt="">
-              </div>
-              <div class="post-content">
-                <a class="post-title" href="single.html">The ship of the desert reducing rapidly
-                  in the world</a>
-                <div class="post-meta d-flex align-items-center">
-                  <a href="catagory.html">Camel</a>
-                  <a href="#">2
-                    Comments</a>
+                    <div class="post-thumbnail">
+                        <img src="{{ $post->image_url }}" alt="">
+                    </div>
+
+                    <div class="post-content">
+                        <a class="post-title"
+                           href="{{ route('post.show', $post->slug) }}">
+                            {{ $post->title }}
+                        </a>
+
+                        <div class="post-meta">
+                            <a href="#">
+                                Featured
+                            </a>
+
+                            <a href="#">
+                                {{ $post->created_at->format('d M') }}
+                            </a>
+                        </div>
+                    </div>
+
                 </div>
-              </div>
+                @endforeach
             </div>
 
-            <!-- Single News Post-->
-            <div class="single-news-post d-flex align-items-center">
-              <div class="post-thumbnail">
-                <div class="video-icon">
-                  <i class="ti ti-player-play"></i>
-                </div>
-                <img src="img/bg-img/24.jpg" alt="">
-              </div>
-              <div class="post-content">
-                <a class="post-title" href="single.html">Why you will eat apple & banana every
-                  day</a>
-                <div class="post-meta d-flex align-items-center">
-                  <a href="catagory.html">Habits</a>
-                  <a href="#">8
-                    Comments</a>
-                </div>
-              </div>
-            </div>
-
-            <!-- Single News Post-->
-            <div class="single-news-post d-flex align-items-center">
-              <div class="post-thumbnail">
-                <img src="img/bg-img/25.jpg" alt=""></div>
-              <div class="post-content">
-                <a class="post-title" href="single.html">Satellite now producing more waste on
-                  the planet</a>
-                <div class="post-meta d-flex align-items-center">
-                  <a href="catagory.html">Planet</a>
-                  <a href="#">6
-                    Comments</a>
-                </div>
-              </div>
-            </div>
-          </div>
-
-          <!-- Single Tab Pane-->
-          <div class="tab-pane fade" id="nav-featured" role="tabpanel" aria-labelledby="nav-featured-tab" tabindex="0">
-            <!-- Single News Post-->
-            <div class="single-news-post d-flex align-items-center">
-              <div class="post-thumbnail">
-                <img src="img/bg-img/26.jpg" alt="">
-              </div>
-              <div class="post-content">
-                <a class="post-title" href="single.html">Balcony gardening is a new trend of big
-                  cities</a>
-                <div class="post-meta d-flex align-items-center">
-                  <a href="profile-for-viewer.html">Mayaj</a>
-                  <a href="#">9 min read</a>
-                </div>
-              </div>
-            </div>
-
-            <!-- Single News Post-->
-            <div class="single-news-post d-flex align-items-center">
-              <div class="post-thumbnail">
-                <div class="video-icon">
-                  <i class="ti ti-player-play"></i>
-                </div>
-                <img src="img/bg-img/27.jpg" alt="">
-              </div>
-              <div class="post-content">
-                <a class="post-title" href="single.html">The world is becoming polluted very
-                  fast and lives are being destroyed</a>
-                <div class="post-meta d-flex align-items-center">
-                  <a href="profile-for-viewer.html">Nazrul</a>
-                  <a href="#">27 min read</a>
-                </div>
-              </div>
-            </div>
-
-            <!-- Single News Post-->
-            <div class="single-news-post d-flex align-items-center">
-              <div class="post-thumbnail">
-                <img src="img/bg-img/28.jpg" alt="">
-              </div>
-              <div class="post-content">
-                <a class="post-title" href="single.html">Sea is polluted in a terrible way by
-                  human garbage</a>
-                <div class="post-meta d-flex align-items-center">
-                  <a href="profile-for-viewer.html">Suha</a>
-                  <a href="#">59 min read</a>
-                </div>
-              </div>
-            </div>
-          </div>
         </div>
-      </div>
     </div>
+</div>
 
     <!-- Popular Tags-->
-    <div class="popular-tags-wrapper">
-      <div class="container">
+   <div class="popular-tags-wrapper">
+    <div class="container">
         <h5 class="mb-3 ps-2 newsten-title">Popular Tags</h5>
-      </div>
-
-      <div class="container">
-        <!-- Popular Tags List-->
-        <div class="popular-tags-list">
-          <a class="btn btn-primary btn-sm m-1" href="#">#Politics</a>
-          <a class="btn btn-success btn-sm m-1" href="#">#Fashion</a>
-          <a class="btn btn-warning btn-sm m-1" href="#">#Tech</a>
-          <a class="btn btn-danger btn-sm m-1" href="#">#Lifestyle</a>
-          <a class="btn btn-info btn-sm m-1" href="#">#Sports</a>
-          <a class="btn btn-success btn-sm m-1" href="#">#World</a>
-          <a class="btn btn-warning btn-sm m-1" href="#">#Environment</a>
-          <a class="btn btn-danger btn-sm m-1" href="#">#People</a>
-          <a class="btn btn-info btn-sm m-1" href="#">#Gadgets</a>
-          <a class="btn btn-success btn-sm m-1" href="#">#Health</a>
-          <a class="btn btn-primary btn-sm m-1" href="#">#Wildlife</a>
-        </div>
-      </div>
     </div>
+
+    <div class="container">
+        <div class="popular-tags-list">
+@php
+$colors = ['primary','success','warning','danger','info'];
+@endphp
+
+            @foreach($tags as $tag)
+            <a class="btn btn-{{ $colors[array_rand($colors)] }} btn-sm m-1"
+               href="{{ route('tag.show', $tag->id) }}">
+
+                #{{ $tag->name }}
+
+            </a>
+            @endforeach
+
+        </div>
+    </div>
+</div>
   </div>
 @endsection

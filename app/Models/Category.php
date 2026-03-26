@@ -21,6 +21,12 @@ class Category extends Model implements HasMedia
     |--------------------------------------------------------------------------
     */
 
+
+    public function posts()
+{
+    return $this->hasMany(Post::class);
+}
+
     public function registerMediaCollections(): void
     {
         $this->addMediaCollection('category_image')

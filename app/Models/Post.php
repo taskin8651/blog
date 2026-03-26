@@ -112,4 +112,13 @@ public function isBookmarked()
     {
         return $this->getFirstMediaUrl('post_image') ?: asset('default.png');
     }
+
+    public function isLiked()
+{
+    return $this->likes()
+        ->where('user_id', auth()->id())
+        ->exists();
+}
+
+
 }
