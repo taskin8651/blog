@@ -8,6 +8,8 @@ use App\Http\Controllers\Custom\TrendingController;
 use App\Http\Controllers\Custom\BookmarkController;
 use App\Http\Controllers\Custom\LikeController;
 use App\Http\Controllers\Custom\CommentController;
+use App\Http\Controllers\Custom\LiveStreamController;
+
 
 Route::redirect('/', '/login');
 Route::get('/home', function () {
@@ -57,6 +59,13 @@ Route::resource('bookmarks', 'BookmarkController')->only(['index','destroy']);
 Route::delete('bookmarks/destroy', 'BookmarkController@massDestroy')->name('bookmarks.massDestroy');
 Route::resource('ads', 'AdController');
 
+ Route::resource('live', 'LiveStreamController');
+
+   
+    // 🔥 Toggle live on/off
+    Route::post('live/{live}/toggle', [\App\Http\Controllers\Admin\LiveStreamController::class, 'toggle'])
+        ->name('live.toggle');
+
    
 });
 Route::group(['prefix' => 'profile', 'as' => 'profile.', 'namespace' => 'Auth', 'middleware' => ['auth']], function () {
@@ -83,6 +92,8 @@ Route::get('/tag/{id}', [TagController::class, 'show'])->name('tag.show');
 
 Route::get('/trending', [TrendingController::class, 'index'])->name('trending');
 
+Route::get('/live', [LiveStreamController::class, 'index'])->name('live');
+
 
 Route::middleware('auth')->group(function () {
 
@@ -102,5 +113,6 @@ Route::middleware('auth')->group(function () {
 
     Route::post('/comments/{post}', [CommentController::class, 'store'])
     ->name('comments.store');
+
 
 });

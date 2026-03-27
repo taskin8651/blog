@@ -49,8 +49,9 @@
     <!-- Sidenav Nav-->
     <ul class="sidenav-nav">
       <li>
-        <a href="live.html"><i class="ti ti-player-play"></i>Live<span
-            class="red-circle ms-2 flashing-effect"></span></a>
+        <a href="{{ route('live') }}">
+    <i class="ti ti-broadcast"></i> Live
+</a>
       </li>
       <li>
         <a href="{{ url('profile/password') }}"><i class="ti ti-user-circle"></i>My Profile</a>

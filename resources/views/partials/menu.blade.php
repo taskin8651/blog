@@ -97,9 +97,9 @@
         @endcan
 
         {{-- CONTENT MANAGEMENT --}}
-@canany(['post_access','category_access','tag_access','comment_access','like_access','bookmark_access'])
+@canany(['post_access','category_access','tag_access','comment_access','like_access','bookmark_access','live_access'])
 <div x-data="{ open:
-    {{ request()->is('admin/posts*','admin/categories*','admin/tags*','admin/comments*','admin/likes*','admin/bookmarks*')
+    {{ request()->is('admin/posts*','admin/categories*','admin/tags*','admin/comments*','admin/likes*','admin/bookmarks*','admin/live*')
     ? 'true' : 'false' }}
 }">
 
@@ -170,6 +170,15 @@
             <i class="fas fa-bookmark mr-2"></i> Bookmarks
         </a>
         @endcan
+
+        {{-- LIVE STREAM 🔥 --}}
+@can('live_access')
+<a href="{{ route('admin.live.index') }}"
+   class="block px-3 py-2 rounded transition
+   {{ request()->is('admin/live*') ? 'bg-slate-800 text-white' : 'hover:bg-slate-800 hover:pl-4' }}">
+    <i class="fas fa-video mr-2"></i> Live Stream
+</a>
+@endcan
 
     </div>
 </div>
