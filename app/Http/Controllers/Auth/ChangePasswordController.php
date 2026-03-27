@@ -18,32 +18,68 @@ class ChangePasswordController extends Controller
         return view('auth.passwords.edit');
     }
 
+    /*
+    |--------------------------------------------------------------------------
+    | Update Password
+    |--------------------------------------------------------------------------
+    */
     public function update(UpdatePasswordRequest $request)
     {
-        auth()->user()->update($request->validated());
+        auth()->user()->update([
+            'password' => $request->password
+        ]);
 
-        return redirect()->route('profile.password.edit')->with('message', __('global.change_password_success'));
+        return redirect()->route('profile.password.edit')
+            ->with('message', __('global.change_password_success'));
     }
 
+    /*
+    |--------------------------------------------------------------------------
+    | Update Profile (🔥 Updated)
+    |--------------------------------------------------------------------------
+    */
     public function updateProfile(UpdateProfileRequest $request)
     {
         $user = auth()->user();
 
-        $user->update($request->validated());
+        // 🔥 Basic fields
+        $user->update([
+            'name' => $request->name,
+            'email' => $request->email,
+            'phone' => $request->phone,
+            'designation' => $request->designation,
+            'address' => $request->address,
+        ]);
 
-        return redirect()->route('profile.password.edit')->with('message', __('global.update_profile_success'));
+        // 🔥 Profile Image (Spatie Media)
+        if ($request->hasFile('image')) {
+            $user->clearMediaCollection('profile_image');
+
+            $user->addMediaFromRequest('image')
+                ->toMediaCollection('profile_image');
+        }
+
+        return redirect()->route('profile.password.edit')
+            ->with('message', __('global.update_profile_success'));
     }
 
+    /*
+    |--------------------------------------------------------------------------
+    | Delete Account
+    |--------------------------------------------------------------------------
+    */
     public function destroy()
     {
         $user = auth()->user();
 
+        // email unique banane ke liye
         $user->update([
             'email' => time() . '_' . $user->email,
         ]);
 
         $user->delete();
 
-        return redirect()->route('login')->with('message', __('global.delete_account_success'));
+        return redirect()->route('login')
+            ->with('message', __('global.delete_account_success'));
     }
 }

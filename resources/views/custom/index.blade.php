@@ -53,21 +53,28 @@
             class="red-circle ms-2 flashing-effect"></span></a>
       </li>
       <li>
-        <a href="profile.html"><i class="ti ti-user-circle"></i>My Profile</a>
+        <a href="{{ url('profile/password') }}"><i class="ti ti-user-circle"></i>My Profile</a>
       </li>
-      <li>
-        <a href="pages.html"><i class="ti ti-files"></i>All Pages<span class="ms-2 badge badge-danger">HOT</span></a>
-      </li>
-      <li>
-        <a href="catagory.html"><i class="ti ti-layout"></i>All Category <span
-            class="ms-2 badge badge-warning">14+</span></a>
-      </li>
-      <li>
-        <a href="settings.html"><i class="ti ti-settings"></i>Settings</a>
-      </li>
-      <li>
-        <a href="login.html"><i class="ti ti-login"></i>Log In</a>
-      </li>
+      
+      @guest
+<li>
+    <a href="{{ route('login') }}">
+        <i class="ti ti-login"></i> Log In
+    </a>
+</li>
+@endguest
+
+@auth
+<li>
+    <form action="{{ route('logout') }}" method="POST">
+        @csrf
+
+        <button style="border:none; background:none; margin-left:10px">
+            <i class="ti ti-logout"></i> Logout
+</button>
+    </form>
+</li>
+@endauth
     </ul>
 
     <!-- Go Back Button-->

@@ -48,31 +48,35 @@
   <div class="footer-nav-area" id="footerNav">
     <div class="newsten-footer-nav h-100">
       <ul class="h-100 d-flex align-items-center justify-content-between">
-        <li class="active">
-          <a href="{{ route('custom.home') }}">
-            <i class="ti ti-home-2"></i>
-          </a>
-        </li>
-        <li>
-          <a href="{{ route('categories') }}">
-            <i class="ti ti-layout"></i>
-          </a>
-        </li>
-        <li>
-          <a href="{{ route('trending') }}">
-            <i class="ti ti-bolt"></i>
-          </a>
-        </li>
-        <li>
-          <a href="pages.html">
-            <i class="ti ti-heart"></i>
-          </a>
-        </li>
-        <li>
-          <a href="{{ route('bookmarks') }}">
-            <i class="ti ti-bookmark"></i>
-          </a>
-        </li>
+       <li class="{{ request()->routeIs('custom.home') ? 'active' : '' }}">
+    <a href="{{ route('custom.home') }}">
+        <i class="ti ti-home-2"></i>
+    </a>
+</li>
+
+<li class="{{ request()->routeIs('categories*') ? 'active' : '' }}">
+    <a href="{{ route('categories') }}">
+        <i class="ti ti-layout"></i>
+    </a>
+</li>
+
+<li class="{{ request()->routeIs('trending') ? 'active' : '' }}">
+    <a href="{{ route('trending') }}">
+        <i class="ti ti-bolt"></i>
+    </a>
+</li>
+
+<li class="{{ request()->is('password.edit*') ? 'active' : '' }}">
+    <a href="{{ url('profile/password') }}">
+        <i class="ti ti-heart"></i>
+    </a>
+</li>
+
+<li class="{{ request()->routeIs('bookmarks') ? 'active' : '' }}">
+    <a href="{{ route('bookmarks') }}">
+        <i class="ti ti-bookmark"></i>
+    </a>
+</li>
       </ul>
     </div>
   </div>
