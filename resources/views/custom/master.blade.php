@@ -68,7 +68,7 @@
 
 <li class="{{ request()->is('password.edit*') ? 'active' : '' }}">
     <a href="{{ url('profile/password') }}">
-        <i class="ti ti-heart"></i>
+        <i class="ti ti-user"></i>
     </a>
 </li>
 
