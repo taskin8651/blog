@@ -90,8 +90,8 @@ return [
         ],
     ],
     'epaper' => [
-        'title'          => 'Epaper',
-        'title_singular' => 'Epaper',
+        'title'          => 'OnRoadMedia',
+        'title_singular' => 'OnRoadMedia',
         'fields'         => [
             'id'                      => 'ID',
             'id_helper'               => ' ',
