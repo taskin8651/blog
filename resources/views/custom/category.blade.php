@@ -14,12 +14,12 @@
 
       <!-- Page Title-->
       <div class="page-heading">
-        <h6 class="mb-0">Catagoryddd</h6>
+        <h6 class="mb-0">Category</h6>
       </div>
 
       <!-- Search Form-->
       <div class="search-form">
-        <a href="search.html">
+        <a href="#">
           <i class="ti ti-search"></i>
         </a>
       </div>
