@@ -31,21 +31,17 @@ function run($cmd) {
 // =======================
 echo "<pre>";
 
-// ✅ Fix Git identity (only if not set)
+// ✅ Set Git identity (safe for server)
 run('git config user.name "taskin"');
 run('git config user.email "mdsayebalam10@gmail.com"');
 
-// ✅ Abort merge safely (ignore error if none)
-run('git merge --abort 2>/dev/null');
+// ✅ Fetch latest changes from GitHub
+run('git fetch origin');
 
-// ✅ Clean state (fresh deploy)
-run('git reset --hard HEAD');
-run('git clean -fd');
+// ✅ Safe pull (team friendly, no data loss)
+run('git pull origin main --no-rebase --no-edit');
 
-// ✅ Pull latest code
-run('git pull origin main --no-rebase');
-
-// ✅ Composer auto-detect
+// ✅ Composer install (auto detect)
 $composer = trim(shell_exec('which composer'));
 
 if ($composer) {
