@@ -7,7 +7,7 @@
     <div class="container h-100 d-flex align-items-center justify-content-between">
       <!-- Back Button-->
       <div class="back-button">
-        <a href="home.html">
+        <a href="/">
           <i class="ti ti-chevron-left"></i>
         </a>
       </div>
