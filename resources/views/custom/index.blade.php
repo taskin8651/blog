@@ -32,7 +32,7 @@
     <div class="time-date-weather-wrapper text-center py-5" style="background-image: url('img/bg-img/1.jpg')">
       <div class="weather-update mb-4">
         <l class="icon ti ti-temperature-sun"></l>
-        <h4 class="mb-1">2°F</h4>
+        <h4 class="mb-1">92°F</h4>
         <h6 class="mb-0">India</h6>
         <p class="mb-0">Mostly sunny</p>
       </div>
