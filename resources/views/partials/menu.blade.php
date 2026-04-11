@@ -200,7 +200,7 @@
 
     </nav>
 
-    {{-- LOGOUTt --}}
+    {{-- LOGOUTT --}}
     <div class="border-t border-slate-700 p-3">
         <a href="#"
            onclick="event.preventDefault(); document.getElementById('logoutform').submit();"
