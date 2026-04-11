@@ -207,7 +207,7 @@
            class="group flex items-center gap-3 px-3 py-2 rounded transition
                   hover:bg-red-600 hover:text-white">
             <i class="fas fa-sign-out-alt transition group-hover:translate-x-1"></i>
-            {{ trans('global.logout') }}  ddf
+            {{ trans('global.logout') }}
         </a>
     </div>
 
