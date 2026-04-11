@@ -31,31 +31,39 @@ function run($cmd) {
 // =======================
 echo "<pre>";
 
-// 1️⃣ Fix unfinished merge
-run('git merge --abort');
+// ✅ Fix Git identity (only if not set)
+run('git config user.name "taskin"');
+run('git config user.email "mdsayebalam10@gmail.com"');
 
-// 2️⃣ Reset & clean (force fresh state)
+// ✅ Abort merge safely (ignore error if none)
+run('git merge --abort 2>/dev/null');
+
+// ✅ Clean state (fresh deploy)
 run('git reset --hard HEAD');
 run('git clean -fd');
 
-// 3️⃣ Pull latest code (safe merge)
+// ✅ Pull latest code
 run('git pull origin main --no-rebase');
 
-// 4️⃣ Install/update dependencies (if needed)
-run('composer install --no-dev --optimize-autoloader');
+// ✅ Composer auto-detect
+$composer = trim(shell_exec('which composer'));
 
-// 5️⃣ Laravel optimize
+if ($composer) {
+    run("$composer install --no-dev --optimize-autoloader");
+} else {
+    echo "⚠️ Composer not found, skipping...\n";
+}
+
+// ✅ Laravel optimize
 run('php artisan migrate --force');
 run('php artisan config:cache');
 run('php artisan route:cache');
 run('php artisan view:cache');
-
-// 6️⃣ Clear cache (extra safety)
 run('php artisan cache:clear');
 
 // =======================
 // ✅ DONE
 // =======================
-echo "✅ Deployment Completed Successfully";
+echo "✅ Deployment Completed Successfully 🚀";
 
 echo "</pre>";
