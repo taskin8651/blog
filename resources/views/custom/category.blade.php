@@ -14,7 +14,7 @@
 
       <!-- Page Title-->
       <div class="page-heading">
-        <h6 class="mb-0">Catagory</h6>
+        <h6 class="mb-0">Catagoryddd</h6>
       </div>
 
       <!-- Search Form-->
