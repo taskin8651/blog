@@ -12,7 +12,7 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black">
 
   <!-- Title-->
-  <title>OnRoadMedia</title>
+  <title>OnRoad</title>
 
   <!-- Favicon -->
   <link rel="icon" href="{{ asset('img/core-img/favicon.ico') }}">
