@@ -1,0 +1,15 @@
+deployment:
+  tasks:
+    - export DEPLOYPATH=/home/smartuni/public_html/onroadmedia.in
+
+    # Copy project
+    - /bin/cp -R * $DEPLOYPATH
+
+    # Move public files to root
+    - /bin/cp -R public/* $DEPLOYPATH
+
+    # Laravel optimize
+    - cd $DEPLOYPATH
+    - php artisan config:cache
+    - php artisan route:cache
+    - php artisan view:cache
