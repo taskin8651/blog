@@ -1,0 +1,3 @@
+deployment:
+  tasks:
+    - echo "DEPLOY WORKING" > /home/smartuni/public_html/test.txt
