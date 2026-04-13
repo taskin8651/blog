@@ -12,7 +12,7 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black">
 
   <!-- Title-->
-  <title>News10 - Blog &amp; Magazine Mobile HTML Template</title>
+  <title>OnRoadMedia</title>
 
   <!-- Favicon -->
   <link rel="icon" href="{{ asset('img/core-img/favicon.ico') }}">
