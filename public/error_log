@@ -1,0 +1,11 @@
+[28-Mar-2026 05:52:31 UTC] PHP Warning:  chdir(): No such file or directory (errno 2) in /home/smartuni/public_html/blogs.web-link.site/public/deploy.php on line 10
+[28-Mar-2026 05:53:33 UTC] PHP Warning:  chdir(): No such file or directory (errno 2) in /home/smartuni/public_html/blogs.web-link.site/public/deploy.php on line 10
+[28-Mar-2026 05:53:37 UTC] PHP Warning:  chdir(): No such file or directory (errno 2) in /home/smartuni/public_html/blogs.web-link.site/public/deploy.php on line 10
+[28-Mar-2026 05:53:40 UTC] PHP Warning:  chdir(): No such file or directory (errno 2) in /home/smartuni/public_html/blogs.web-link.site/public/deploy.php on line 10
+[10-Apr-2026 16:46:52 UTC] PHP Warning:  chdir(): No such file or directory (errno 2) in /home/smartuni/public_html/blogs.web-link.site/public/deploy.php on line 10
+[10-Apr-2026 17:30:04 UTC] PHP Warning:  chdir(): No such file or directory (errno 2) in /home/smartuni/public_html/blogs.web-link.site/public/deploy.php on line 10
+[10-Apr-2026 17:32:53 UTC] PHP Warning:  chdir(): No such file or directory (errno 2) in /home/smartuni/public_html/blogs.web-link.site/public/deploy.php on line 10
+[10-Apr-2026 17:35:00 UTC] PHP Warning:  chdir(): No such file or directory (errno 2) in /home/smartuni/public_html/blogs.web-link.site/public/deploy.php on line 10
+[10-Apr-2026 17:39:58 UTC] PHP Warning:  chdir(): No such file or directory (errno 2) in /home/smartuni/public_html/blogs.web-link.site/public/deploy.php on line 10
+[10-Apr-2026 17:42:30 UTC] PHP Warning:  chdir(): No such file or directory (errno 2) in /home/smartuni/public_html/blogs.web-link.site/public/deploy.php on line 10
+[10-Apr-2026 17:43:58 UTC] PHP Warning:  chdir(): No such file or directory (errno 2) in /home/smartuni/public_html/blogs.web-link.site/public/deploy.php on line 10

@@ -1,42 +1,83 @@
-@extends('layouts.app')
+@extends('custom.master')
+
 @section('content')
-<div class="row justify-content-center">
-    <div class="col-md-6">
-        <div class="card mx-4">
-            <div class="card-body p-4">
-                <h1>{{ trans('panel.site_title') }}</h1>
 
-                <p class="text-muted">{{ trans('global.reset_password') }}</p>
+<div class="login-wrapper d-flex align-items-center justify-content-center">
 
-                @if(session('status'))
-                    <div class="alert alert-success" role="alert">
-                        {{ session('status') }}
-                    </div>
-                @endif
+    <!-- Shapes -->
+    <div class="login-shape">
+        <img src="{{ asset('img/core-img/login.png') }}" alt="">
+    </div>
 
-                <form method="POST" action="{{ route('password.email') }}">
-                    @csrf
+    <div class="login-shape2">
+        <img src="{{ asset('img/core-img/login2.png') }}" alt="">
+    </div>
 
-                    <div class="form-group">
-                        <input id="email" type="email" class="form-control{{ $errors->has('email') ? ' is-invalid' : '' }}" name="email" required autocomplete="email" autofocus placeholder="{{ trans('global.login_email') }}" value="{{ old('email') }}">
+    <div class="container">
 
-                        @if($errors->has('email'))
-                            <div class="invalid-feedback">
-                                {{ $errors->first('email') }}
-                            </div>
-                        @endif
-                    </div>
+        <!-- Header -->
+        <div class="login-text text-center">
+            <img class="login-img" src="{{ asset('img/bg-img/12.png') }}" alt="">
+            <h3 class="mb-0">Forgot Password</h3>
 
-                    <div class="row">
-                        <div class="col-12">
-                            <button type="submit" class="btn btn-primary btn-flat btn-block">
-                                {{ trans('global.send_password') }}
-                            </button>
-                        </div>
-                    </div>
-                </form>
+            <div class="bg-shapes">
+                <div class="shape1"></div>
+                <div class="shape2"></div>
+                <div class="shape3"></div>
+                <div class="shape4"></div>
+                <div class="shape5"></div>
+                <div class="shape6"></div>
+                <div class="shape7"></div>
+                <div class="shape8"></div>
             </div>
         </div>
+
+        <!-- SUCCESS MESSAGE -->
+        @if(session('status'))
+            <div class="alert alert-success text-center mt-3">
+                {{ session('status') }}
+            </div>
+        @endif
+
+        <!-- FORM -->
+        <div class="register-form mt-5 px-3">
+            <form method="POST" action="{{ route('password.email') }}">
+                @csrf
+
+                {{-- EMAIL --}}
+                <div class="form-group text-start mb-4">
+                    <label>
+                        <i class="ti ti-mail-opened"></i>
+                    </label>
+
+                    <input class="form-control @error('email') is-invalid @enderror"
+                           type="email"
+                           name="email"
+                           value="{{ old('email') }}"
+                           placeholder="Email Address"
+                           required autofocus>
+
+                    @error('email')
+                        <small class="text-danger">{{ $message }}</small>
+                    @enderror
+                </div>
+
+                {{-- BUTTON --}}
+                <button class="btn btn-primary btn-lg w-100">
+                    Send Reset Link
+                </button>
+
+            </form>
+        </div>
+
+        <!-- LINKS -->
+        <div class="login-meta-data text-center">
+            <a href="{{ route('login') }}" class="d-block mt-2">
+                Back to Login
+            </a>
+        </div>
+
     </div>
 </div>
+
 @endsection

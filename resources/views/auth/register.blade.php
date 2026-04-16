@@ -17,7 +17,7 @@
 
         <!-- Header -->
         <div class="login-text text-center">
-            <img class="login-img" src="{{ asset('assets/img/bg-img/12.png') }}" alt="">
+            <img class="login-img" src="{{ asset('img/bg-img/12.png') }}" alt="">
             <h3 class="mb-0">Welcome, Register Now!</h3>
 
             <div class="bg-shapes">

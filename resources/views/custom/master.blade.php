@@ -2,30 +2,62 @@
 <html lang="en">
 
 <head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-  <meta name="description" content="">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta charset="utf-8">
+    
+    <!-- Title-->
+    <title>OnroadMedia</title>
+  
+    <!-- SEO Meta -->
+    <meta name="description" content="@yield('description', 'OnRoadMedia is a fast-growing platform sharing travel vlogs, lifestyle content, real stories and influencer experiences across India.')">
+    <meta name="keywords" content="@yield('keywords', 'OnRoadMedia, Travel Vlog India, Lifestyle Vlog, Influencer India, Social Media Creator, YouTube Vlogger, Reels Creator')">
+    <meta name="author" content="OnRoadMedia">
+    <meta name="robots" content="index, follow">
+  
+    <!-- Mobile -->
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <meta name="csrf-token" content="{{ csrf_token() }}">
+    
+    <!-- Canonical URL -->
+    <link rel="canonical" href="https://onroadmedia.in/">
 
-  <meta name="theme-color" content="#e42f08">
-  <meta name="apple-mobile-web-app-capable" content="yes">
-  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <!-- Theme -->
+    <meta name="theme-color" content="#e42f08">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    
+    <!-- Favicon & App Icons -->
+    <link rel="icon" href="{{ asset('img/favicon/favicon.ico') }}">
+    <link rel="icon" sizes="32x32" href="{{ asset('img/favicon/favicon-32x32.png') }}">
+    <link rel="icon" sizes="16x16" href="{{ asset('img/favicon/favicon-16x16.png') }}">
+    
+    <!-- Open Graph / Social Preview -->
+    <meta property="og:title" content="OnRoadMedia – Travel Vlogs & Lifestyle Content">
+    <meta property="og:description" content="Watch amazing travel vlogs, lifestyle content and real-life stories on OnRoadMedia. Follow the journey of a growing social media influencer.">
+    <meta property="og:url" content="https://onroadmedia.in/">
+    <meta property="og:type" content="website">
+    
+    <!-- OG Image -->
+    <meta property="og:image" content="https://onroadmedia.in/img/og-image.jpg">
+    <meta property="og:image:secure_url" content="https://onroadmedia.in/img/og-image.jpg">
+    <meta property="og:image:type" content="image/jpeg">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
+    <meta property="og:image:alt" content="OnRoadMedia – Travel Vlogs & Influencer Content Preview">
+    
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="OnRoadMedia – Travel Vlogs & Lifestyle">
+    <meta name="twitter:description" content="Explore travel, reels, lifestyle and influencer content on OnRoadMedia.">
+    <meta name="twitter:image" content="https://onroadmedia.in/img/og-image.jpg">
+    <meta name="twitter:image:alt" content="OnRoadMedia – Travel & Lifestyle Preview">
+    <meta name="twitter:site" content="@onroadmedia">
+    <meta name="twitter:creator" content="@onroadmedia">
 
-  <!-- Title-->
-  <title>OnRoad</title>
-
-  <!-- Favicon -->
-  <link rel="icon" href="{{ asset('img/core-img/favicon.ico') }}">
-  <link rel="apple-touch-icon" href="{{ asset('img/icons/icon-96x96.png') }}">
-  <link rel="apple-touch-icon" sizes="152x152" href="{{ asset('img/icons/icon-152x152.png') }}">
-  <link rel="apple-touch-icon" sizes="167x167" href="{{ asset('img/icons/icon-167x167.png') }}">
-  <link rel="apple-touch-icon" sizes="180x180" href="{{ asset('img/icons/icon-180x180.png') }}">
-
-  <!-- Stylesheet-->
-  <link rel="stylesheet" href="{{ asset('style.css') }}">
-
-  <!-- Web App Manifest -->
-  <link rel="manifest" href="{{ asset('manifest.json') }}">
+    <!-- Stylesheet-->
+    <link rel="stylesheet" href="{{ asset('style.css') }}">
+    
 </head>
 
 <body>
@@ -99,8 +131,6 @@
 <script src="{{ asset('js/dark-mode-switch.js') }}"></script>
 <script src="{{ asset('js/active.js') }}"></script>
 
-{{-- PWA --}}
-{{-- <script src="{{ asset('js/pwa.js') }}"></script> --}}
 </body>
 
 

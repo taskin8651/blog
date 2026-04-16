@@ -9,7 +9,7 @@ use App\Http\Controllers\Custom\BookmarkController;
 use App\Http\Controllers\Custom\LikeController;
 use App\Http\Controllers\Custom\CommentController;
 use App\Http\Controllers\Custom\LiveStreamController;
-
+// test deploywww
 
 Route::redirect('/', '/login');
 Route::get('/home', function () {
@@ -80,6 +80,7 @@ Route::group(['prefix' => 'profile', 'as' => 'profile.', 'namespace' => 'Auth', 
 
 
 
+Route::get('/', [IndexController::class, 'index'])->name('custom.home');
 
 Route::get('/categories', [CategoryController::class, 'index'])->name('categories');
 
@@ -115,5 +116,3 @@ Route::middleware('auth')->group(function () {
 
 
 });
-
-Route::get('/', [IndexController::class, 'index'])->name('custom.home');

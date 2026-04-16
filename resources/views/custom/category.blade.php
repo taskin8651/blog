@@ -7,19 +7,19 @@
     <div class="container h-100 d-flex align-items-center justify-content-between">
       <!-- Back Button-->
       <div class="back-button">
-        <a href="/">
+        <a href="home.html">
           <i class="ti ti-chevron-left"></i>
         </a>
       </div>
 
       <!-- Page Title-->
       <div class="page-heading">
-        <h6 class="mb-0">Category</h6>
+        <h6 class="mb-0">Catagory</h6>
       </div>
 
       <!-- Search Form-->
       <div class="search-form">
-        <a href="#">
+        <a href="search.html">
           <i class="ti ti-search"></i>
         </a>
       </div>

@@ -21,7 +21,7 @@
             {{ trans('global.dashboard') }}
         </a>
 
-        {{-- USER MANAGEMENT --}}
+        {{-- 1. USER MANAGEMENT --}}
         @can('user_management_access')
             <div x-data="{ open:
                 {{ request()->is('admin/permissions*')
@@ -37,12 +37,10 @@
                         <i class="fas fa-users text-slate-400 group-hover:text-white transition"></i>
                         {{ trans('cruds.userManagement.title') }}
                     </span>
-
                     <i class="fas fa-chevron-down text-xs transition-transform duration-300"
                        :class="open ? 'rotate-180' : ''"></i>
                 </button>
 
-                {{-- DROPDOWN --}}
                 <div x-show="open"
                      x-transition:enter="transition ease-out duration-200"
                      x-transition:enter-start="opacity-0 -translate-y-2"
@@ -96,95 +94,102 @@
             </div>
         @endcan
 
-        {{-- CONTENT MANAGEMENT --}}
-@canany(['post_access','category_access','tag_access','comment_access','like_access','bookmark_access','live_access'])
-<div x-data="{ open:
-    {{ request()->is('admin/posts*','admin/categories*','admin/tags*','admin/comments*','admin/likes*','admin/bookmarks*','admin/live*')
-    ? 'true' : 'false' }}
-}">
-
-    <button @click="open = !open"
-            class="group w-full flex items-center justify-between px-3 py-2 rounded
-                   hover:bg-slate-800 transition">
-        <span class="flex items-center gap-3">
-            <i class="fas fa-newspaper text-slate-400 group-hover:text-white transition"></i>
-            Content Management
-        </span>
-
-        <i class="fas fa-chevron-down text-xs transition-transform duration-300"
-           :class="open ? 'rotate-180' : ''"></i>
-    </button>
-
-    <div x-show="open" class="ml-6 mt-1 space-y-1">
-
-        {{-- POSTS --}}
-        @can('post_access')
-        <a href="{{ route('admin.posts.index') }}"
-           class="block px-3 py-2 rounded transition
-           {{ request()->is('admin/posts*') ? 'bg-slate-800 text-white' : 'hover:bg-slate-800 hover:pl-4' }}">
-            <i class="fas fa-file-alt mr-2"></i> Posts
+        {{-- 2. LIVE STREAM --}}
+        @can('live_access')
+        <a href="{{ route('admin.live.index') }}"
+           class="group flex items-center gap-3 px-3 py-2 rounded transition
+           {{ request()->is('admin/live*') ? 'bg-slate-800 text-white' : 'hover:bg-slate-800 hover:pl-4' }}">
+            <i class="fas fa-video text-slate-400 group-hover:text-white transition"></i>
+            Live Stream
         </a>
         @endcan
 
-        {{-- CATEGORIES --}}
-        @can('category_access')
-        <a href="{{ route('admin.categories.index') }}"
-           class="block px-3 py-2 rounded transition
-           {{ request()->is('admin/categories*') ? 'bg-slate-800 text-white' : 'hover:bg-slate-800 hover:pl-4' }}">
-            <i class="fas fa-list mr-2"></i> Categories
-        </a>
-        @endcan
-
-        {{-- TAGS --}}
-        @can('tag_access')
-        <a href="{{ route('admin.tags.index') }}"
-           class="block px-3 py-2 rounded transition
-           {{ request()->is('admin/tags*') ? 'bg-slate-800 text-white' : 'hover:bg-slate-800 hover:pl-4' }}">
-            <i class="fas fa-tags mr-2"></i> Tags
-        </a>
-        @endcan
-
-        {{-- COMMENTS --}}
-        @can('comment_access')
-        <a href="{{ route('admin.comments.index') }}"
-           class="block px-3 py-2 rounded transition
-           {{ request()->is('admin/comments*') ? 'bg-slate-800 text-white' : 'hover:bg-slate-800 hover:pl-4' }}">
-            <i class="fas fa-comments mr-2"></i> Comments
-        </a>
-        @endcan
-
-        {{-- LIKES --}}
+        {{-- 3. LIKES --}}
         @can('like_access')
         <a href="{{ route('admin.likes.index') }}"
-           class="block px-3 py-2 rounded transition
+           class="group flex items-center gap-3 px-3 py-2 rounded transition
            {{ request()->is('admin/likes*') ? 'bg-slate-800 text-white' : 'hover:bg-slate-800 hover:pl-4' }}">
-            <i class="fas fa-heart mr-2"></i> Likes
+            <i class="fas fa-heart text-slate-400 group-hover:text-white transition"></i>
+            Likes
         </a>
         @endcan
 
-        {{-- BOOKMARKS 🔥 --}}
+        {{-- 4. COMMENTS --}}
+        @can('comment_access')
+        <a href="{{ route('admin.comments.index') }}"
+           class="group flex items-center gap-3 px-3 py-2 rounded transition
+           {{ request()->is('admin/comments*') ? 'bg-slate-800 text-white' : 'hover:bg-slate-800 hover:pl-4' }}">
+            <i class="fas fa-comments text-slate-400 group-hover:text-white transition"></i>
+            Comments
+        </a>
+        @endcan
+
+        {{-- 5. BOOKMARKS --}}
         @can('bookmark_access')
         <a href="{{ route('admin.bookmarks.index') }}"
-           class="block px-3 py-2 rounded transition
+           class="group flex items-center gap-3 px-3 py-2 rounded transition
            {{ request()->is('admin/bookmarks*') ? 'bg-slate-800 text-white' : 'hover:bg-slate-800 hover:pl-4' }}">
-            <i class="fas fa-bookmark mr-2"></i> Bookmarks
+            <i class="fas fa-bookmark text-slate-400 group-hover:text-white transition"></i>
+            Bookmarks
         </a>
         @endcan
 
-        {{-- LIVE STREAM 🔥 --}}
-@can('live_access')
-<a href="{{ route('admin.live.index') }}"
-   class="block px-3 py-2 rounded transition
-   {{ request()->is('admin/live*') ? 'bg-slate-800 text-white' : 'hover:bg-slate-800 hover:pl-4' }}">
-    <i class="fas fa-video mr-2"></i> Live Stream
-</a>
-@endcan
+        {{-- 7. CONTENT MANAGEMENT (Posts, Categories, Tags) --}}
+        @canany(['post_access','category_access','tag_access'])
+        <div x-data="{ open:
+            {{ request()->is('admin/posts*','admin/categories*','admin/tags*')
+            ? 'true' : 'false' }}
+        }">
 
-    </div>
-</div>
-@endcanany
+            <button @click="open = !open"
+                    class="group w-full flex items-center justify-between px-3 py-2 rounded
+                           hover:bg-slate-800 transition">
+                <span class="flex items-center gap-3">
+                    <i class="fas fa-newspaper text-slate-400 group-hover:text-white transition"></i>
+                    Content Management
+                </span>
+                <i class="fas fa-chevron-down text-xs transition-transform duration-300"
+                   :class="open ? 'rotate-180' : ''"></i>
+            </button>
 
-        {{-- CHANGE PASSWORD --}}
+            <div x-show="open"
+                 x-transition:enter="transition ease-out duration-200"
+                 x-transition:enter-start="opacity-0 -translate-y-2"
+                 x-transition:enter-end="opacity-100 translate-y-0"
+                 x-transition:leave="transition ease-in duration-150"
+                 x-transition:leave-start="opacity-100 translate-y-0"
+                 x-transition:leave-end="opacity-0 -translate-y-2"
+                 class="ml-6 mt-1 space-y-1">
+
+                @can('post_access')
+                <a href="{{ route('admin.posts.index') }}"
+                   class="block px-3 py-2 rounded transition
+                   {{ request()->is('admin/posts*') ? 'bg-slate-800 text-white' : 'hover:bg-slate-800 hover:pl-4' }}">
+                    <i class="fas fa-file-alt mr-2"></i> Posts
+                </a>
+                @endcan
+
+                @can('category_access')
+                <a href="{{ route('admin.categories.index') }}"
+                   class="block px-3 py-2 rounded transition
+                   {{ request()->is('admin/categories*') ? 'bg-slate-800 text-white' : 'hover:bg-slate-800 hover:pl-4' }}">
+                    <i class="fas fa-list mr-2"></i> Categories
+                </a>
+                @endcan
+
+                @can('tag_access')
+                <a href="{{ route('admin.tags.index') }}"
+                   class="block px-3 py-2 rounded transition
+                   {{ request()->is('admin/tags*') ? 'bg-slate-800 text-white' : 'hover:bg-slate-800 hover:pl-4' }}">
+                    <i class="fas fa-tags mr-2"></i> Tags
+                </a>
+                @endcan
+
+            </div>
+        </div>
+        @endcanany
+        
+        {{-- 6. CHANGE PASSWORD --}}
         @if(file_exists(app_path('Http/Controllers/Auth/ChangePasswordController.php')))
             @can('profile_password_edit')
                 <a href="{{ route('profile.password.edit') }}"
@@ -200,7 +205,7 @@
 
     </nav>
 
-    {{-- LLLOGOUT --}}
+    {{-- LOGOUT --}}
     <div class="border-t border-slate-700 p-3">
         <a href="#"
            onclick="event.preventDefault(); document.getElementById('logoutform').submit();"

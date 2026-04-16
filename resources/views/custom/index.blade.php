@@ -9,8 +9,8 @@
 
       <!-- Logo-->
       <div class="logo-wrapper">
-        <a href="home.html">
-          <img src="img/core-img/logo.png" alt="">
+        <a href="#">
+          <img src="{{ asset('img/core-img/logo.png') }}">
         </a>
       </div>
 
@@ -29,7 +29,7 @@
   <!-- Side Nav Wrapper-->
   <div class="sidenav-wrapper" id="sidenavWrapper">
     <!-- Time - Weather-->
-    <div class="time-date-weather-wrapper text-center py-5" style="background-image: url('img/bg-img/1.jpg')">
+    <div class="time-date-weather-wrapper text-center py-5" style="background-image: url('{{ asset('img/bg-img/1.jpg') }}')">
       <div class="weather-update mb-4">
         <l class="icon ti ti-temperature-sun"></l>
         <h4 class="mb-1">92°F</h4>
@@ -84,8 +84,8 @@
     </div>
   </div>
 
-  <!-- Toast -->
-  <div class="toast home-page-toast shadow-lg" role="alert" aria-live="assertive" aria-atomic="true"
+   <!-- Toast -->
+  <!--<div class="toast home-page-toast shadow-lg" role="alert" aria-live="assertive" aria-atomic="true"
     data-bs-autohide="true" data-bs-delay="10000" id="installWrap">
     <div class="toast-body p-4">
       <div class="toast-text me-2">
@@ -97,7 +97,7 @@
     </div>
     <button class="btn btn-close position-absolute p-2" type="button" data-bs-dismiss="toast"
       aria-label="Close"></button>
-  </div>
+  </div>-->
 
   <div class="page-content-wrapper">
     <!-- News Today Wrapper-->
@@ -282,8 +282,8 @@
     <!-- Editorial Choice News Wrapper-->
     <div class="editorial-choice-news-wrapper">
       <!-- Background Shapes-->
-      <div class="bg-shape1"><img src="img/core-img/edito.png" alt=""></div>
-      <div class="bg-shape2" style="background-image: url('img/core-img/edito2.png')"></div>
+      <div class="bg-shape1"><img src="{{ asset('img/core-img/edito.png') }}"></div>
+      <div class="bg-shape2" style="background-image: url('{{ asset('img/core-img/edito2.png') }}')"></div>
 
       <div class="container">
         <div class="editorial-choice-title text-center mb-4"><i class="ti ti-shield"></i>
