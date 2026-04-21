@@ -163,7 +163,7 @@
         
         <!-- Profile Image -->
         <div class="user-thumbnail">
-            <img src="{{  asset('img/ins.jpg') }}" alt="profile">
+            <img src="{{ $user['profile_pic_url'] ?? asset('img/bg-img/profile.jpg') }}" alt="profile">
         </div>
 
         <!-- User Content -->
