@@ -159,37 +159,79 @@
       </div>
 
    <div class="container">
+    <!-- User Meta Data -->
     <div class="user-meta-data d-flex align-items-center">
         
-        <!-- Profile Image -->
+        <!-- User Thumbnail -->
         <div class="user-thumbnail">
-            <img src="{{ $user['profile_pic_url'] ?? asset('img/bg-img/profile.jpg') }}" alt="profile">
+            <img src="{{ asset('img/ins.jpg') }}" alt="onroad profile">
         </div>
 
-        <!-- User Content -->
-        <div class="user-content">
-            <h6>{{ '@' . ($user['username'] ?? 'onroad____') }}</h6>
-            <p>{{ $user['biography'] ?? 'Instagram Creator' }}</p>
+      <div class="user-content">
+    <h6>@onroad____</h6>
+    <p>Instagram Creator</p>
 
-            <div class="user-meta-data d-flex align-items-center justify-content-between">
-                
-                <p class="mx-1">
-                    <span class="counter">{{ $user['media_count'] ?? 2,130 }}</span>
-                    <span>Posts</span>
-                </p>
+    <div class="user-meta-data d-flex align-items-center justify-content-between">
 
-                <p class="mx-1">
-                    <span class="counter">{{ $user['follower_count'] ?? 240K }}</span>
-                    <span>Followers</span>
-                </p>
+        <p class="mx-1" >
+            <span id="posts" class="fw-bold fs-5" data-count="2130">0</span>
+            <span>Posts</span>
+        </p>
 
-                <p class="mx-1">
-                    <span class="counter">{{ $user['following_count'] ?? 214 }}</span>
-                    <span>Following</span>
-                </p>
+        <p class="mx-1 fw-bold">
+            <span id="followers" class="fw-bold fs-5" data-count="240000">0</span>
+            <span class="fw-bold">Followers</span>
+        </p>
 
-            </div>
-        </div>
+        <p class="mx-1">
+            <span id="following" class="fw-bold fs-5" data-count="214">0</span>
+            <span>Following</span>
+        </p>
+
+    </div>
+</div>
+
+<script>
+document.addEventListener("DOMContentLoaded", function () {
+
+    function formatNumber(num) {
+        if (num >= 1000000) return (num / 1000000).toFixed(1) + 'M';
+        if (num >= 1000) return (num / 1000).toFixed(1) + 'K';
+        return num.toLocaleString();
+    }
+
+    function animateCounter(el) {
+        let target = parseInt((el.getAttribute('data-count') || '0').replace(/,/g, ''));
+        if (isNaN(target)) target = 0;
+
+        const duration = 1200;
+        let startTime = null;
+
+        function animate(time) {
+            if (!startTime) startTime = time;
+
+            const progress = Math.min((time - startTime) / duration, 1);
+            const current = Math.floor(progress * target);
+
+            el.innerText = formatNumber(current);
+
+            if (progress < 1) {
+                requestAnimationFrame(animate);
+            } else {
+                el.innerText = formatNumber(target);
+            }
+        }
+
+        requestAnimationFrame(animate);
+    }
+
+    // 🔥 manually call (no class)
+    animateCounter(document.getElementById('posts'));
+    animateCounter(document.getElementById('followers'));
+    animateCounter(document.getElementById('following'));
+
+});
+</script>
     </div>
 </div>
     </div>
