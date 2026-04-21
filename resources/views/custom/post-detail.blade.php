@@ -9,7 +9,7 @@
     <div class="container h-100 d-flex align-items-center justify-content-between">
       <!-- Back Button-->
       <div class="back-button">
-        <a href="home.html">
+        <a href="/">
           <i class="ti ti-chevron-left"></i>
         </a>
       </div>
@@ -21,7 +21,7 @@
 
       <!-- Search Form-->
       <div class="search-form">
-        <a href="search.html">
+        <a href="#">
           <i class="ti ti-search"></i>
         </a>
       </div>
@@ -158,25 +158,40 @@
         </a>
       </div>
 
-      <div class="container">
-        <!-- User Meta Data-->
-        <div class="user-meta-data d-flex align-items-center">
-          <!-- User Thumbnail-->
-          <div class="user-thumbnail">
-            <img src="img/bg-img/3.jpg" alt="">
-          </div>
-          <!-- User Content-->
-          <div class="user-content">
-            <h6>Lim Sarah</h6>
-            <p>Publisher</p>
-            <div class="user-meta-data d-flex align-items-center justify-content-between">
-              <p class="mx-1"><span class="counter">432</span><span>Articles</span></p>
-              <p class="mx-1"><span class="counter">302</span><span>Followers</span></p>
-              <p class="mx-1"><span class="counter">104</span><span>Following</span></p>
-            </div>
-          </div>
+   <div class="container">
+    <div class="user-meta-data d-flex align-items-center">
+        
+        <!-- Profile Image -->
+        <div class="user-thumbnail">
+            <img src="{{  asset('img/ins.jpg') }}" alt="profile">
         </div>
-      </div>
+
+        <!-- User Content -->
+        <div class="user-content">
+            <h6>{{ '@' . ($user['username'] ?? 'onroad____') }}</h6>
+            <p>{{ $user['biography'] ?? 'Instagram Creator' }}</p>
+
+            <div class="user-meta-data d-flex align-items-center justify-content-between">
+                
+                <p class="mx-1">
+                    <span class="counter">{{ $user['media_count'] ?? 2,130 }}</span>
+                    <span>Posts</span>
+                </p>
+
+                <p class="mx-1">
+                    <span class="counter">{{ $user['follower_count'] ?? 240K }}</span>
+                    <span>Followers</span>
+                </p>
+
+                <p class="mx-1">
+                    <span class="counter">{{ $user['following_count'] ?? 214 }}</span>
+                    <span>Following</span>
+                </p>
+
+            </div>
+        </div>
+    </div>
+</div>
     </div>
 
     <!-- Related Post-->
